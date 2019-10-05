@@ -2,8 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeJsPlugin = require('optimize-js-plugin');
 
-plugins = [new HtmlWebpackPlugin({
-    template: 'src/index.html',
+const plugins = [new HtmlWebpackPlugin({
+    template: 'client/index.html',
     filename: 'index.html',
     inject: 'body'
 })];
@@ -20,10 +20,18 @@ module.exports = (env) => {
 
     return {
         mode: environment,
-        entry: './src/index.js',
+        entry: './client/index.js',
         output: {
-            path: path.resolve(__dirname, 'build'),
+            path: path.resolve(__dirname, 'public'),
             filename: 'app.' + environment + '.bundle.js'
+        },
+        devServer: {
+            proxy: {
+                '/socket.io': {
+                    target: 'http://localhost:3000',
+                    ws: true
+                }
+            }
         },
         module: {
             rules: [

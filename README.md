@@ -1,1 +1,1 @@
-Webpack exercise: added webpack-dev-server and react-hot-loader to wbpack config
+JavaScript ES6 exercise
